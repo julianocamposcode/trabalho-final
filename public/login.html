@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login - Sistema Eleitoral 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="vendors/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="vendors/font-awesome/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="build/css/custom.min.css" rel="stylesheet" />
+    <style>
+      .login_wrapper {
+        max-width: 400px;
+        margin: 100px auto;
+      }
+    </style>
+  </head>
+
+  <body class="login">
+    <div>
+      <div class="login_wrapper">
+        <section class="login_content">
+          <form id="loginForm">
+            <h1>Login</h1>
+            <div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Usuário"
+                id="usuario"
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Senha"
+                id="senha"
+                required
+              />
+            </div>
+            <div>
+              <button type="submit" class="btn btn-success">Login</button>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="separator">
+              <p class="change_link">Sistema Eleitoral 2026</p>
+              <div class="clearfix"></div>
+              <br />
+              <div>
+                <h1><i class="fa fa-institution"></i> ADS - 3º Termo</h1>
+                <p>Trabalho de Programação para Internet</p>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./assets/login.js"></script>
+  </body>
+</html>

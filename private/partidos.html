@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cadastro de Partidos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="vendors/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="vendors/font-awesome/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="build/css/custom.min.css" rel="stylesheet" />
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <!-- MENU LATERAL -->
+        <div class="col-md-3 left_col ">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0">
+              <a href="index.html" class="site_title"
+                ><i class="fa fa-check-square"></i>
+                <span>Eleitoral 2026</span></a
+              >
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- Perfil -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img
+                  src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"
+                  alt="imagem usuario"
+                  class="img-circle profile_img"
+                />
+              </div>
+              <div class="profile_info">
+                <span>Bem-vindo,</span>
+                <h2>Administrador</h2>
+              </div>
+            </div>
+
+            <br />
+
+            <!-- Menu -->
+            <div
+              id="sidebar-menu"
+              class="main_menu_side hidden-print main_menu"
+            >
+              <div class="menu_section">
+                <h3>Menu</h3>
+                <ul class="nav side-menu">
+                  <li>
+                    <a href="/index.html"><i class="fa fa-home"></i>Início</a>
+                  </li>
+                  <li class="active">
+                    <a href="#"
+                      ><i class="fa fa-flag"></i> Cadastrar Partidos</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/candidatos.html"
+                      ><i class="fa fa-user"></i> Cadastrar Candidatos</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" onclick="logout()"
+                      ><i class="fa fa-sign-out"></i> Sair</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOPO -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a
+                    href="javascript:;"
+                    class="user-profile dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png" alt="" /> Admin
+                    <span class="fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu tamanho">
+                    <li><a href="#" onclick="logout()">Sair</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="right_col" role="main">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Cadastro de Partidos</h3>
+            </div>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="row">
+            <!-- FORMULÁRIO -->
+            <div class="col-md-6 col-sm-6">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Adicionar / Editar Partido</h2>
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                  <form id="form-partido">
+                    <input type="hidden" id="indice" value="" />
+
+                    <div class="form-group">
+                      <label for="codigo">Código</label>
+                      <input
+                        type="text"
+                        id="codigo"
+                        class="form-control"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="nome">Nome do Partido</label>
+                      <input
+                        type="text"
+                        id="nome"
+                        class="form-control"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="sigla">Sigla</label>
+                      <input
+                        type="text"
+                        id="sigla"
+                        class="form-control"
+                        maxlength="10"
+                        required
+                      />
+                    </div>
+
+                    <button type="submit" class="btn btn-success">
+                      Salvar
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- TABELA -->
+            <div class="col-md-6 col-sm-6">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Partidos Cadastrados</h2>
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Sigla</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabela-partidos">
+                      <tr>
+                        <td>123</td>
+                        <td>Partido da Justiça</td>
+                        <td>PJ</td>
+                        <td>
+                          <button class="btn btn-info btn-xs">Editar</button>
+                          <button class="btn btn-danger btn-xs">Excluir</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+          <div class="pull-right">
+            Sistema Eleitoral 2026 - Desenvolvido por Juliano
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="build/js/custom.min.js"></script>
+
+    <script src="./assets/partidos.js"></script>
+  </body>
+</html>
