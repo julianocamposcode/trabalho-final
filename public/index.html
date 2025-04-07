@@ -3,8 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Dashboard - Sistema Eleitoral</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />  
     <!-- Estilos -->
     <link
       href="vendors/bootstrap/dist/css/bootstrap.min.css"
@@ -71,9 +70,7 @@
                     >
                   </li>
                   <li>
-                    <a href="#" onclick="logout()"
-                      ><i class="fa fa-sign-out"></i> Sair</a
-                    >
+                    <a href="/logout"><i class="fa fa-sign-out"></i> Sair</a>
                   </li>
                 </ul>
               </div>
@@ -93,11 +90,15 @@
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png" alt="" /> Admin
+                    <img
+                      src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"
+                      alt=""
+                    />
+                    Admin
                     <span class="fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu tamanho">
-                    <li><a href="#" onclick="logout()">Sair</a></li>
+                    <li><a href="/logout" onclick="logout()">Sair</a></li>
                   </ul>
                 </li>
               </ul>
@@ -119,26 +120,25 @@
                   </div>
                 </div>
                 <div class="container" role="main">
-                
-
                   <div class="pai">
-                  
                     <div class="col-md-3 col-sm-6 col-xs-12 card">
-                      <div class="tile-stats">
-                        <div class="icon"><i class="fa fa-flag"></i></div>
-                        <div class="count" id="totalPartidos">0</div>
-                        <h3>Partidos</h3>
-                      </div>
+                      <a href="/partidos.html">
+                        <div class="tile-stats">
+                          <div class="icon"><i class="fa fa-flag"></i></div>
+                          <div class="count" id="totalPartidos">0</div>
+                          <h3>Partidos</h3>
+                        </div>
+                      </a>
                     </div>
-        
-                    
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                      <div class="tile-stats">
-                        <div class="icon"><i class="fa fa-users"></i></div>
-                        <div class="count" id="totalCandidatos">0</div>
-                        <h3>Candidatos</h3>
+                    <a href="/candidatos.html">
+                      <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="tile-stats">
+                          <div class="icon"><i class="fa fa-users"></i></div>
+                          <div class="count" id="totalCandidatos">0</div>
+                          <h3>Candidatos</h3>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -160,13 +160,5 @@
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="build/js/custom.min.js"></script>
-
-    <script>
-      function logout() {
-        // aqui você pode fazer uma chamada fetch para /logout no backend
-        alert("Logout realizado com sucesso.");
-        window.location.href = "login.html";
-      }
-    </script>
   </body>
 </html>

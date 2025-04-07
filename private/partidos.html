@@ -19,7 +19,7 @@
     <div class="container body">
       <div class="main_container">
         <!-- MENU LATERAL -->
-        <div class="col-md-3 left_col ">
+        <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0">
               <a href="index.html" class="site_title"
@@ -69,7 +69,7 @@
                     >
                   </li>
                   <li>
-                    <a href="#" onclick="logout()"
+                    <a href="/logout" onclick="logout()"
                       ><i class="fa fa-sign-out"></i> Sair</a
                     >
                   </li>
@@ -91,11 +91,15 @@
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png" alt="" /> Admin
+                    <img
+                      src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"
+                      alt=""
+                    />
+                    Admin
                     <span class="fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu tamanho">
-                    <li><a href="#" onclick="logout()">Sair</a></li>
+                    <li><a href="/logout" onclick="logout()">Sair</a></li>
                   </ul>
                 </li>
               </ul>
@@ -176,14 +180,14 @@
                   <div class="clearfix"></div>
                 </div>
 
-                <div class="x_content">
+                <div class="x_content text-center">
                   <table class="table table-striped">
                     <thead>
-                      <tr>
-                        <th>Código</th>
-                        <th>Nome</th>
-                        <th>Sigla</th>
-                        <th>Ações</th>
+                      <tr>  
+                        <th class="text-center">Código</th>
+                        <th class="text-center">Nome</th>
+                        <th class="text-center">Sigla</th>
+                        <th class="text-center">Ações</th>
                       </tr>
                     </thead>
                     <tbody id="tabela-partidos">

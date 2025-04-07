@@ -25,7 +25,7 @@
     <div>
       <div class="login_wrapper">
         <section class="login_content">
-          <form id="loginForm">
+          <form method="POST" action="/login" id="loginForm">
             <h1>Login</h1>
             <div>
               <input
@@ -33,6 +33,7 @@
                 class="form-control"
                 placeholder="Usuário"
                 id="usuario"
+                name="usuario"
                 required
               />
             </div>
@@ -42,11 +43,13 @@
                 class="form-control"
                 placeholder="Senha"
                 id="senha"
+                name="senha"
                 required
               />
             </div>
             <div>
               <button type="submit" class="btn btn-success">Login</button>
+              <a href="/index.html">Voltar</a>
             </div>
 
             <div class="clearfix"></div>
