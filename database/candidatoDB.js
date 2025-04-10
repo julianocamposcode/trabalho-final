@@ -5,12 +5,12 @@ export default class CandidatoDB {
     constructor() {
         this.init();
     }
-
     async init() {
         try {
             const conexao = await conectar();
             const sql = `CREATE TABLE IF NOT EXISTS candidato (
-            cpf VARCHAR(14) NOT NULL PRIMARY KEY,
+            id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            cpf VARCHAR(14) NOT NULL UNIQUE,
             tituloEleitoral VARCHAR(20) NOT NULL,
             nome VARCHAR(100) NOT NULL,
             endereco VARCHAR(100),
@@ -20,11 +20,11 @@ export default class CandidatoDB {
             uf CHAR(2),
             cep VARCHAR(9),
             rendaMensal DECIMAL(10,2),
-            partidoCodigo INT,
-            FOREIGN KEY (partidoCodigo) REFERENCES partidos(codigo)  
-        );`
-
+            filiacao VARCHAR(10) NOT NULL,
+            FOREIGN KEY (filiacao) REFERENCES partidos(sigla)  
+        )`
             await conexao.execute(sql);
+            conexao.release();
         } catch (erro) {
             console.log(erro);
         }
@@ -32,7 +32,7 @@ export default class CandidatoDB {
     async gravar(candidato) {
         if (candidato instanceof Candidato) {
             const conexao = await conectar();
-            const sql = `INSERT INTO candidato (cpf, tituloEleitoral, nome, endereco, numero, bairro, cidade, uf, cep, rendaMensal, partidoCodigo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            const sql = `INSERT INTO candidato (cpf, tituloEleitoral, nome, endereco, numero, bairro, cidade, uf, cep, rendaMensal, filiacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
             const parametros = [
                 candidato.cpf,
                 candidato.tituloEleitoral,
@@ -44,7 +44,7 @@ export default class CandidatoDB {
                 candidato.uf,
                 candidato.cep,
                 candidato.rendaMensal,
-                candidato.partidoCodigo
+                candidato.filiacao
             ]
             await conexao.execute(sql, parametros);
             conexao.release();
@@ -53,8 +53,9 @@ export default class CandidatoDB {
     async alterar(candidato) {
         if (candidato instanceof Candidato) {
             const conexao = await conectar();
-            const sql = `UPDATE candidato SET tituloEleitoral = ?, nome = ?, endereco = ?, numero = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, rendaMensal = ?, partidoCodigo = ?  WHERE cpf = ?`;
+            const sql = `UPDATE candidato SET cpf = ?, tituloEleitoral = ?, nome = ?, endereco = ?, numero = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, rendaMensal = ?, filiacao = ? WHERE id = ?`;
             const parametros = [
+                candidato.cpf,
                 candidato.tituloEleitoral,
                 candidato.nome,
                 candidato.endereco,
@@ -64,8 +65,8 @@ export default class CandidatoDB {
                 candidato.uf,
                 candidato.cep,
                 candidato.rendaMensal,
-                candidato.partidoCodigo,
-                candidato.cpf
+                candidato.filiacao,
+                candidato.id
             ]
             await conexao.execute(sql, parametros);
             conexao.release();
@@ -74,8 +75,8 @@ export default class CandidatoDB {
     async excluir(candidato) {
         if (candidato instanceof Candidato) {
             const conexao = await conectar();
-            const sql = `DELETE FROM candidato WHERE cpf = ?`;
-            const parametros = [candidato.cpf]
+            const sql = `DELETE FROM candidato WHERE id = ?`;
+            const parametros = [candidato.id]
             await conexao.execute(sql, parametros);
             conexao.release();
         }
@@ -87,6 +88,7 @@ export default class CandidatoDB {
         const [linhas] = await conexao.execute(sql);
         conexao.release();
         return linhas.map(linha => new Candidato(
+            linha.id,
             linha.cpf,
             linha.tituloEleitoral,
             linha.nome,
@@ -97,8 +99,7 @@ export default class CandidatoDB {
             linha.uf,
             linha.cep,
             linha.rendaMensal,
-            linha.partidoCodigo
+            linha.filiacao
         ));
     }
-
 }

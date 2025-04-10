@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Login - Sistema Eleitoral 2026</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="./assets/enter.png  " type="image/x-icon" />
     <link
       href="vendors/bootstrap/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,10 +14,27 @@
       rel="stylesheet"
     />
     <link href="build/css/custom.min.css" rel="stylesheet" />
+
+    <link
+      href="vendors/pnotify/dist/pnotify.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="vendors/pnotify/dist/pnotify.mobile.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <style>
       .login_wrapper {
         max-width: 400px;
         margin: 100px auto;
+      }
+      @media screen and (max-width: 767px) {
+        .login_wrapper {
+          max-width: 300px;
+          margin: 100px auto;
+        }
       }
     </style>
   </head>
@@ -47,9 +65,16 @@
                 required
               />
             </div>
-            <div>
-              <button type="submit" class="btn btn-success">Login</button>
-              <a href="/index.html">Voltar</a>
+            <div style="display: flex; gap: 0.5rem; align-items: center; justify-content: center;">
+              <button
+                type="submit"
+                class="btn btn-success"
+                id="login"
+                style="display: flex; gap: 0.5rem; align-items: center;"
+              >
+                Login
+              </button>
+              <a href="/index.html?nao-autenticado">Voltar</a>
             </div>
 
             <div class="clearfix"></div>
@@ -69,6 +94,13 @@
     </div>
 
     <!-- Scripts -->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="build/js/custom.min.js"></script>
+
+    <!-- Pnotify JS -->
+    <script src="vendors/pnotify/dist/pnotify.js"></script>
+
     <script src="./assets/login.js"></script>
   </body>
 </html>

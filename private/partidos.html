@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <title>Cadastro de Partidos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="shortcut icon" href="./assets/flag.png" type="image/x-icon" />
+
     <link
       href="vendors/bootstrap/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,6 +16,18 @@
       rel="stylesheet"
     />
     <link href="build/css/custom.min.css" rel="stylesheet" />
+
+    <!-- Pnotify CSS -->
+    <link
+      href="vendors/pnotify/dist/pnotify.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="vendors/pnotify/dist/pnotify.mobile.css"
+      rel="stylesheet"
+      type="text/css"
+    />
   </head>
 
   <body class="nav-md">
@@ -34,9 +49,9 @@
             <div class="profile clearfix">
               <div class="profile_pic">
                 <img
-                  src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"
+                  src="https://cdn-icons-png.flaticon.com/512/4607/4607751.png"
                   alt="imagem usuario"
-                  class="img-circle profile_img"
+                  class="img-circle profile_img logo"
                 />
               </div>
               <div class="profile_info">
@@ -92,7 +107,7 @@
                     aria-expanded="false"
                   >
                     <img
-                      src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"
+                      src="https://cdn-icons-png.flaticon.com/512/4607/4607751.png"
                       alt=""
                     />
                     Admin
@@ -130,42 +145,81 @@
                 </div>
 
                 <div class="x_content">
-                  <form id="form-partido">
+                  <form id="form-partido" method="POST" action="#" novalidate>
                     <input type="hidden" id="indice" value="" />
 
+                    <!-- CÓDIGO -->
                     <div class="form-group">
                       <label for="codigo">Código</label>
-                      <input
-                        type="text"
-                        id="codigo"
-                        class="form-control"
-                        required
-                      />
-                    </div>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="fa fa-barcode"></i>
+                          <!-- Ícone de chave para código -->
+                        </span>
 
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="codigo"
+                          placeholder="Digite o código do partido"
+                          required
+                        />
+                      </div>
+                      <span class="help-block" style="display: none"
+                        >Este campo é obrigatório</span
+                      >
+                    </div>  
+
+                    <!-- NOME DO PARTIDO -->
                     <div class="form-group">
                       <label for="nome">Nome do Partido</label>
-                      <input
-                        type="text"
-                        id="nome"
-                        class="form-control"
-                        required
-                      />
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="fa fa-flag"></i>
+                          <!-- Ícone de bandeira para nome -->
+                        </span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="nome"
+                          placeholder="Digite o nome do partido"
+                          required
+                        />
+                      </div>
+                      <span class="help-block" style="display: none"
+                        >Este campo é obrigatório</span
+                      >
                     </div>
 
+                    <!-- SIGLA -->
                     <div class="form-group">
                       <label for="sigla">Sigla</label>
-                      <input
-                        type="text"
-                        id="sigla"
-                        class="form-control"
-                        maxlength="10"
-                        required
-                      />
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="fa fa-font"></i>
+                          <!-- Ícone de letra para sigla -->
+                        </span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="sigla"
+                          placeholder="Digite a sigla do partido"
+                          required
+                        />
+                      </div>
+                      <span class="help-block" style="display: none"
+                        >Este campo é obrigatório</span
+                      >
                     </div>
+                    <input type="hidden" id="id" name="id" value="" />
 
-                    <button type="submit" class="btn btn-success">
-                      Salvar
+                    <button
+                      type="submit"
+                      style="display: flex; gap: 0.5rem; align-items: center"
+                      class="btn btn-success"
+                      id="btn-salvar"
+                    >
+                      Cadastrar
                     </button>
                   </form>
                 </div>
@@ -173,7 +227,7 @@
             </div>
 
             <!-- TABELA -->
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6 tabela mobile">
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Partidos Cadastrados</h2>
@@ -183,24 +237,14 @@
                 <div class="x_content text-center">
                   <table class="table table-striped">
                     <thead>
-                      <tr>  
-                        <th class="text-center">Código</th>
-                        <th class="text-center">Nome</th>
-                        <th class="text-center">Sigla</th>
-                        <th class="text-center">Ações</th>
+                      <tr>
+                        <th scope="col" class="text-center">Código</th>
+                        <th scope="col" class="text-center">Nome</th>
+                        <th scope="col" class="text-center">Sigla</th>
+                        <th scope="col" class="text-center">Ações</th>
                       </tr>
                     </thead>
-                    <tbody id="tabela-partidos">
-                      <tr>
-                        <td>123</td>
-                        <td>Partido da Justiça</td>
-                        <td>PJ</td>
-                        <td>
-                          <button class="btn btn-info btn-xs">Editar</button>
-                          <button class="btn btn-danger btn-xs">Excluir</button>
-                        </td>
-                      </tr>
-                    </tbody>
+                    <tbody id="tabela-partidos"></tbody>
                   </table>
                 </div>
               </div>
@@ -210,9 +254,7 @@
 
         <!-- FOOTER -->
         <footer>
-          <div class="pull-right">
-            Sistema Eleitoral 2026 - Desenvolvido por Juliano
-          </div>
+          <div class="pull-right">Sistema Eleitoral 2026</div>
           <div class="clearfix"></div>
         </footer>
       </div>
@@ -223,6 +265,13 @@
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="build/js/custom.min.js"></script>
 
+    <!-- Pnotify JS -->
+    <script src="vendors/pnotify/dist/pnotify.js"></script>
+
+    <!-- Bootbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+
     <script src="./assets/partidos.js"></script>
+    <script src="assets/index.js"></script>
   </body>
 </html>

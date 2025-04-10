@@ -1,6 +1,7 @@
 import CandidatoDB from "../database/candidatoDB.js"
 
 export default class Candidato {
+    #id
     #cpf
     #tituloEleitoral
     #nome
@@ -11,9 +12,10 @@ export default class Candidato {
     #uf
     #cep
     #rendaMensal
-    #partidoCodigo
+    #filiacao
 
-    constructor(cpf, tituloEleitoral, nome, endereco, numero, bairro, cidade, uf, cep, rendaMensal, partidoCodigo) {
+    constructor(id,cpf, tituloEleitoral, nome, endereco, numero, bairro, cidade, uf, cep, rendaMensal, filiacao) {
+        this.#id = id;
         this.#cpf = cpf;
         this.#tituloEleitoral = tituloEleitoral;
         this.#nome = nome;
@@ -24,9 +26,15 @@ export default class Candidato {
         this.#uf = uf;
         this.#cep = cep;
         this.#rendaMensal = rendaMensal;
-        this.#partidoCodigo = partidoCodigo;
+        this.#filiacao = filiacao;
     }
 
+    get id() {
+        return this.#id;
+    }
+    set id(id) {
+        this.#id = id;
+    }
     get cpf() {
         return this.#cpf;
     }
@@ -87,15 +95,16 @@ export default class Candidato {
     set rendaMensal(rendaMensal) {
         this.#rendaMensal = rendaMensal;
     }
-    get partidoCodigo() {
-        return this.#partidoCodigo;
+    get filiacao() {
+        return this.#filiacao;
     }
-    set partidoCodigo(partidoCodigo) {
-        this.#partidoCodigo = partidoCodigo;
+    set filiacao(filiacao) {
+        this.#filiacao = filiacao;
     }
 
     toJSON() {
         return {
+            "id": this.#id,
             "cpf": this.#cpf,
             "tituloEleitoral": this.#tituloEleitoral,
             "nome": this.#nome,
@@ -106,7 +115,7 @@ export default class Candidato {
             "uf": this.#uf,
             "cep": this.#cep,
             "rendaMensal": this.#rendaMensal,
-            "partidoCodigo": this.#partidoCodigo
+            "filiacao": this.#filiacao
         };
     }
 

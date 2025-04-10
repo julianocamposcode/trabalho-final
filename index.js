@@ -30,7 +30,11 @@ app.get('/login', (req, res) => {
 
 app.get("/logout", (req, res) => {
     req.session.destroy()
-    res.redirect('/index.html');
+    res.redirect('/index.html?nao-autenticado');
+})
+
+app.get("/", (req, res) => {
+    req.session.autenticado ? res.redirect('/index.html') : res.redirect('/index.html?nao-autenticado');
 })
 
 app.post('/login', (req, res) => {
@@ -41,9 +45,9 @@ app.post('/login', (req, res) => {
         req.session.autenticado = true;
         const destino = req.session.urlOriginal || '/';
         req.session.urlOriginal = null; // limpa a variável
-        res.redirect(destino);
+        res.redirect('/login.html' + '?destino=' + destino);
     } else {
-        res.redirect('/login.html?erro=1');
+        res.redirect('/login.html?erro=true');
     }
 })
 

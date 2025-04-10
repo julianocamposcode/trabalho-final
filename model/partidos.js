@@ -1,16 +1,24 @@
 import PartidosDB from "../database/partidosDB.js";
 
 export default class Partido {
+    #id
     #codigo
     #nome
     #sigla
 
-    constructor(codigo, nome, sigla) {
+    constructor(id, codigo, nome, sigla) {
+        this.#id = id;
         this.#codigo = codigo;
         this.#nome = nome;
         this.#sigla = sigla;
     }
 
+    get id() {
+        return this.#id;
+    }
+    set id(id) {
+        this.#id = id;
+    }
     get codigo() {
         return this.#codigo;
     }
@@ -32,6 +40,7 @@ export default class Partido {
 
     toJSON() {
         return {
+            "id": this.#id,
             "codigo": this.#codigo,
             "nome": this.#nome,
             "sigla": this.#sigla

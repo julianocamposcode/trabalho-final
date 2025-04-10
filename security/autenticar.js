@@ -3,6 +3,6 @@ export default function autenticar(req, res, next) {
         next();
     } else {
         req.session.urlOriginal = req.originalUrl;
-        res.redirect('/login');
+        res.redirect('/login');   
     }
 }

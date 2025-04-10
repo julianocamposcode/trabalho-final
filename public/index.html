@@ -2,8 +2,10 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Dashboard - Sistema Eleitoral</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />  
+    <title>Inicio - Sistema Eleitoral</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png" />
+
     <!-- Estilos -->
     <link
       href="vendors/bootstrap/dist/css/bootstrap.min.css"
@@ -37,12 +39,12 @@
                 <img
                   src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"
                   alt="imagem usuario"
-                  class="img-circle profile_img"
+                  class="img-circle profile_img logo"
                 />
               </div>
               <div class="profile_info">
                 <span>Bem-vindo,</span>
-                <h2>Administrador</h2>
+                <h2 class="controle-login">Administrador</h2>
               </div>
             </div>
 
@@ -70,7 +72,9 @@
                     >
                   </li>
                   <li>
-                    <a href="/logout"><i class="fa fa-sign-out"></i> Sair</a>
+                    <a href="/logout" class="sairLogin"
+                      ><i class="fa fa-sign-out"></i> Sair</a
+                    >
                   </li>
                 </ul>
               </div>
@@ -86,19 +90,24 @@
                 <li class="">
                   <a
                     href="javascript:;"
-                    class="user-profile dropdown-toggle"
+                    class="user-profile dropdown-toggle controle-login"
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
                     <img
                       src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"
                       alt=""
+                      class="logo"
                     />
                     Admin
                     <span class="fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu tamanho">
-                    <li><a href="/logout" onclick="logout()">Sair</a></li>
+                    <li>
+                      <a href="/logout" class="sairLoginTopo" onclick="logout()"
+                        >Sair</a
+                      >
+                    </li>
                   </ul>
                 </li>
               </ul>
@@ -113,7 +122,7 @@
         <div class="right_col" role="main">
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="dashboard_graph">
+              <div class="">
                 <div class="row x_title">
                   <div class="col-md-6">
                     <h3>Painel Inicial <small>Controle de Eleições</small></h3>
@@ -121,7 +130,7 @@
                 </div>
                 <div class="container" role="main">
                   <div class="pai">
-                    <div class="col-md-3 col-sm-6 col-xs-12 card">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
                       <a href="/partidos.html">
                         <div class="tile-stats">
                           <div class="icon"><i class="fa fa-flag"></i></div>
@@ -142,15 +151,120 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-12 mobile">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Partido <small>Candidatos Filiados</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li>
+                        <a class="collapse-link"
+                          ><i class="fa fa-chevron-up"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table class="table table-striped text-center tabela">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-center">Cpf</th>
+                          <th scope="col" class="text-center">
+                            Titulo de Eleitor
+                          </th>
+                          <th scope="col" class="text-center">Nome</th>
+                          <th scope="col" class="text-center">Endereço</th>
+                          <th scope="col" class="text-center">Número</th>
+                          <th scope="col" class="text-center">Bairro</th>
+                          <th scope="col" class="text-center">Cidade</th>
+                          <th scope="col" class="text-center">UF</th>
+                          <th scope="col" class="text-center">Cep</th>
+                          <th scope="col" class="text-center">Renda Mensal</th>
+                          <th scope="col" class="text-center">Partido</th>
+                          <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tabela-candidatos">
+                        <!-- <tr>
+                          <td data-label="Cpf:">123.456.789-00</td>
+                          <td data-label="Titulo de Eleitor:">123456789012</td>
+                          <td data-label="Nome:">Maria da Silva</td>
+                          <td data-label="Endereço:">Rua das Flores</td>
+                          <td data-label="Número:">123</td>
+                          <td data-label="Bairro:">Centro</td>
+                          <td data-label="Cidade:">Curitiba</td>
+                          <td data-label="UF:">PR</td>
+                          <td data-label="Cep:">80000-000</td>
+                          <td data-label="Renda Mensal:">3500.00</td>
+                          <td data-label="Filiação:">PSOL</td>
+                          <td data-label="Ações:">
+                            <div>
+                              <button class="btn btn-info btn-xs">
+                                Editar
+                              </button>
+                              <button class="btn btn-danger btn-xs">
+                                Excluir
+                              </button>
+                            </div>
+                          </td>
+                        </tr> -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Partido <small>Candidatos Filiados</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li>
+                        <a class="collapse-link"
+                          ><i class="fa fa-chevron-up"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table class="table table-striped text-center tabela">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-center">Cpf</th>
+                          <th scope="col" class="text-center">
+                            Titulo de Eleitor
+                          </th>
+                          <th scope="col" class="text-center">Nome</th>
+                          <th scope="col" class="text-center">Endereço</th>
+                          <th scope="col" class="text-center">Número</th>
+                          <th scope="col" class="text-center">Bairro</th>
+                          <th scope="col" class="text-center">Cidade</th>
+                          <th scope="col" class="text-center">UF</th>
+                          <th scope="col" class="text-center">Cep</th>
+                          <th scope="col" class="text-center">Renda Mensal</th>
+                          <th scope="col" class="text-center">Partido</th>
+                          <th scope="col" class="text-center">Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tabela-candidatos"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- FOOTER -->
         <footer>
-          <div class="pull-right">
-            Sistema Eleitoral 2026 - Desenvolvido por Juliano
-          </div>
+          <div class="pull-right">Sistema Eleitoral 2026</div>
           <div class="clearfix"></div>
         </footer>
       </div>
@@ -160,5 +274,6 @@
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="build/js/custom.min.js"></script>
+    <script src="./assets/index.js"></script>
   </body>
 </html>

@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <title>Cadastro de Candidatos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="shortcut icon" href="./assets/user.png" type="image/x-icon" />
+
     <link
       href="vendors/bootstrap/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,15 +16,27 @@
       rel="stylesheet"
     />
     <link href="build/css/custom.min.css" rel="stylesheet" />
+
+    <!-- Pnotify CSS -->
+    <link
+      href="vendors/pnotify/dist/pnotify.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="vendors/pnotify/dist/pnotify.mobile.css"
+      rel="stylesheet"
+      type="text/css"
+    />
   </head>
 
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
         <!-- MENU LATERAL -->
-        <div class="col-md-3 left_col ">
+        <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
-            <div class="navbar nav_title " style="border: 0">
+            <div class="navbar nav_title" style="border: 0">
               <a href="index.html" class="site_title"
                 ><i class="fa fa-check-square"></i>
                 <span>Eleitoral 2026</span></a
@@ -34,9 +49,9 @@
             <div class="profile clearfix">
               <div class="profile_pic">
                 <img
-                  src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png"
+                  src="https://cdn-icons-png.flaticon.com/512/4607/4607751.png"
                   alt="imagem usuario"
-                  class="img-circle profile_img"
+                  class="img-circle profile_img logo"
                 />
               </div>
               <div class="profile_info">
@@ -80,7 +95,7 @@
         </div>
 
         <!-- TOPO -->
-        <div class="top_nav">
+        <div class="top_nav" id="edicao">
           <div class="nav_menu">
             <nav>
               <ul class="nav navbar-nav navbar-right">
@@ -91,7 +106,11 @@
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <img src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png" alt="" /> Admin
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/4607/4607751.png"
+                      alt=""
+                    />
+                    Admin
                     <span class="fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu tamanho">
@@ -109,8 +128,18 @@
         <!-- CONTEÚDO PRINCIPAL -->
         <div class="right_col" role="main">
           <div class="page-title">
-            <div class="title_left">
-              <h3>Cadastro de Candidatos</h3>
+            <div
+              class="title_left"
+              style="display: flex; justify-content: space-between"
+            >
+              <h3 class="mobile-h3">Cadastro de Candidatos</h3>
+              <button
+                class="btn btn-success"
+                onclick="mostrarSigla()"
+                id="consultar"
+              >
+                Consultar Partido
+              </button>
             </div>
           </div>
 
@@ -120,199 +149,312 @@
             <div class="col-md-12 col-sm-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Formulário</h2>
+                  <h2>Adicionar / Editar Candidato</h2>
+
                   <div class="clearfix"></div>
                 </div>
+                <div
+                  class="x_content"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                  "
+                >
+                  <div class="col-md-12 col-sm-12">
+                    <form
+                      id="formCandidato"
+                      class="form-horizontal"
+                      novalidate
+                      method="POST"
+                      action="#"
+                    >
+                      <div class="flex">
+                        <div class="form-group col-md-3">
+                          <label class="control-label col-md-1" for="cpf"
+                            >Cpf</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-male"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="cpf"
+                              placeholder="Digite o CPF do candidato"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+
+                        <div class="form-group col-md-2 group-filiacao">
+                          <label class="control-label col-md-1" for="filiacao"
+                            >Partido</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-flag"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="filiacao"
+                              placeholder="SIGLA"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+
+                        <div class="form-group col-md-3">
+                          <label class="control-label col-md-1" for="titulo"
+                            >Título</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-credit-card"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="titulo"
+                              placeholder="Digite o título de eleitor"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+
+                        <div class="form-group col-md-4">
+                          <label class="control-label col-md-1" for="nome"
+                            >Nome</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-user"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="nome"
+                              placeholder="Digite o nome do candidato"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+
+                        <div class="form-group col-md-3">
+                          <label class="control-label col-md-1" for="endereco"
+                            >Endereço</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-home"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="endereco"
+                              placeholder="Digite o endereço"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+
+                        <div class="form-group col-md-2">
+                          <label for="numero" class="control-label col-md-3"
+                            >Número</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-hashtag"></i
+                            ></span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="numero"
+                              placeholder="Número"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+                        <div class="form-group col-md-3 group-bairro">
+                          <label for="bairro" class="control-label col-md-1"
+                            >Bairro</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-map-marker"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="bairro"
+                              placeholder="Bairro"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+
+                        <div class="form-group col-md-3">
+                          <label for="cidade" class="control-label col-md-1"
+                            >Cidade</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-building"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="cidade"
+                              placeholder="Cidade"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+
+                        <div class="form-group col-md-2 group-uf">
+                          <label for="uf" class="control-label col-md-1"
+                            >UF</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-map"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="uf"
+                              maxlength="2"
+                              placeholder="UF"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+                        <div class="form-group form-cep col-md-2">
+                          <label for="cep" class="control-label col-md-1"
+                            >CEP</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-location-arrow"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="cep"
+                              placeholder="CEP"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+
+                        <div class="form-group col-md-2">
+                          <label for="renda" class="control-label col-md-1"
+                            >Renda
+                          </label>
+                          <div class="input-group">
+                            <span class="input-group-addon"
+                              ><i class="fa fa-money"></i
+                            ></span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="renda"
+                              step="0.01"
+                              placeholder="Renda Mensal"
+                              required
+                            />
+                          </div>
+                          <span class="help-block" style="display: none"
+                            >Este campo é obrigatório</span
+                          >
+                        </div>
+                      </div>
+
+                      <input type="hidden" id="id" name="id" value="" />
+
+                      <div class="form-group">
+                        <div class="center">
+                          <button
+                            type="submit"
+                            class="btn btn-success btn-candidato"
+                            id="btn-salvar"
+                            style="
+                              display: flex;
+                              gap: 0.5rem;
+                              align-items: center;
+                            "
+                          >
+                            Cadastrar
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- TABELA -->
+            </div>
+            <div class="col-md-12 col-sm-6 mobile">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Candidatos Cadastrados</h2>
+                  <div class="clearfix"></div>
+                </div>
+
                 <div class="x_content">
-                  <form id="formCandidato" class="form-horizontal">
-                    <div class="form-group">
-                      <label class="control-label col-md-3">CPF</label>
-                      <div class="col-md-6">
-                        <input
-                          type="text"
-                          id="cpf"
-                          class="form-control"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3"
-                        >Título de Eleitor</label
-                      >
-                      <div class="col-md-6">
-                        <input
-                          type="text"
-                          id="titulo"
-                          class="form-control"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3">Nome</label>
-                      <div class="col-md-6">
-                        <input
-                          type="text"
-                          id="nome"
-                          class="form-control"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3">Endereço</label>
-                      <div class="col-md-6">
-                        <input
-                          type="text"
-                          id="endereco"
-                          class="form-control"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3">Número</label>
-                      <div class="col-md-2">
-                        <input
-                          type="number"
-                          id="numero"
-                          class="form-control"
-                          required
-                        />
-                      </div>
-                      <label class="control-label col-md-1">Bairro</label>
-                      <div class="col-md-3">
-                        <input
-                          type="text"
-                          id="bairro"
-                          class="form-control"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3">Cidade</label>
-                      <div class="col-md-3">
-                        <input
-                          type="text"
-                          id="cidade"
-                          class="form-control"
-                          required
-                        />
-                      </div>
-                      <label class="control-label col-md-1">UF</label>
-                      <div class="col-md-2">
-                        <input
-                          type="text"
-                          id="uf"
-                          maxlength="2"
-                          class="form-control"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3">CEP</label>
-                      <div class="col-md-2">
-                        <input
-                          type="text"
-                          id="cep"
-                          class="form-control"
-                          required
-                        />
-                      </div>
-                      <label class="control-label col-md-2">Renda Mensal</label>
-                      <div class="col-md-2">
-                        <input
-                          type="number"
-                          id="renda"
-                          class="form-control"
-                          step="0.01"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div class="ln_solid"></div>
-
-                    <div class="form-group">
-                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-success">
-                          Cadastrar
-                        </button>
-                        <button type="reset" class="btn btn-danger">
-                          Limpar
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-
-                  <div
-                    id="mensagem"
-                    class="alert alert-success"
-                    style="display: none"
-                  >
-                    Candidato cadastrado com sucesso!
-                  </div>
-
-                  <!-- TABELA -->
-                  <div class="col-md-12 col-sm-6">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Candidatos Cadastrados</h2>
-                        <div class="clearfix"></div>
-                      </div>
-
-                      <div class="x_content">
-                        <table class="table table-striped text-center">
-                          <thead>
-                            <tr>
-                              <th class="text-center">Cpf</th>
-                              <th class="text-center">Titulo de Eleitor</th>
-                              <th class="text-center">Nome</th>
-                              <th class="text-center">Endereço</th>
-                              <th class="text-center">Número</th>
-                              <th class="text-center">Bairro</th>
-                              <th class="text-center">Cidade</th>
-                              <th class="text-center">UF</th>
-                              <th class="text-center">Cep</th>
-                              <th class="text-center">Renda Mensal</th>
-                              <th class="text-center">Ações</th>
-                            </tr>
-                          </thead>
-                          <tbody id="tabela-partidos">
-                            <tr>
-                              <td>123.456.789-00</td>
-                              <td>123456789012</td>
-                              <td>Maria da Silva</td>
-                              <td>Rua das Flores</td>
-                              <td>123</td>
-                              <td>Centro</td>
-                              <td>Curitiba</td>
-                              <td>PR</td>
-                              <td>80000-000</td>
-                              <td>3500.00</td>
-                              <td>
-                                <button class="btn btn-info btn-xs">
-                                  Editar
-                                </button>
-                                <button class="btn btn-danger btn-xs">
-                                  Excluir
-                                </button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
+                  <table class="table table-striped text-center tabela">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center">Cpf</th>
+                        <th scope="col" class="text-center">
+                          Titulo de Eleitor
+                        </th>
+                        <th scope="col" class="text-center">Nome</th>
+                        <th scope="col" class="text-center">Endereço</th>
+                        <th scope="col" class="text-center">Número</th>
+                        <th scope="col" class="text-center">Bairro</th>
+                        <th scope="col" class="text-center">Cidade</th>
+                        <th scope="col" class="text-center">UF</th>
+                        <th scope="col" class="text-center">Cep</th>
+                        <th scope="col" class="text-center">Renda Mensal</th>
+                        <th scope="col" class="text-center">Partido</th>
+                        <th scope="col" class="text-center">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabela-candidatos"></tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -320,11 +462,25 @@
         </div>
         <!-- /CONTEÚDO PRINCIPAL -->
       </div>
+      <footer>
+        <div class="pull-right">Sistema Eleitoral 2026</div>
+        <div class="clearfix"></div>
+      </footer>
     </div>
-    <!-- SCRIPTS -->
-    <script src="./assets/candidatos.js"></script>
+
+    <!-- Scripts -->
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="build/js/custom.min.js"></script>
+
+    <!-- Pnotify JS -->
+    <script src="vendors/pnotify/dist/pnotify.js"></script>
+
+    <!-- Bootbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+
+    <script src="./assets/candidatos.js"></script>
+    <script src="assets/index.js"></script>
+    <script></script>
   </body>
 </html>
