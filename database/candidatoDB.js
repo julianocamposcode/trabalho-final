@@ -84,7 +84,7 @@ export default class CandidatoDB {
 
     async consultar() {
         const conexao = await conectar();
-        const sql = `SELECT * FROM candidato ORDER BY nome`;
+        const sql = `SELECT * FROM candidato`;
         const [linhas] = await conexao.execute(sql);
         conexao.release();
         return linhas.map(linha => new Candidato(

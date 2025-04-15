@@ -1,27 +1,3 @@
-// const mediaQuery = window.matchMedia('(max-width: 768px)');
-
-// function handleMediaQueryChange(e) {
-//     if (e.matches) {
-//         let div = document.createElement('div')
-//         let div2 = document.createElement('div')
-//         div.classList.add('linha')
-//         div2.classList.add('linha')
-//         let sigla = document.querySelector('.group-filiacao')
-//         let uf = document.querySelector('.group-uf')
-//         let bairro = document.querySelector('.group-bairro')
-//         let numeros = document.querySelector('.group-numero')
-//         div.appendChild(sigla)
-//         div.appendChild(uf)
-//         div2.appendChild(bairro)
-//         div2.appendChild(numeros)
-
-//         console.log(div2)
-//     }
-// }
-
-// mediaQuery.addEventListener('change', handleMediaQueryChange);
-// handleMediaQueryChange(mediaQuery);
-
 // --------------integração------------
 const form = document.getElementById("formCandidato")
 
@@ -96,7 +72,7 @@ async function manipularEnvio(event) {
                 botao.innerHTML = `Editar`;
             }
         });
-
+        s
     }
 }
 
@@ -148,7 +124,7 @@ function pegarDados() {
     const uf = document.getElementById('uf').value
     const cep = document.getElementById('cep').value
     const renda = document.getElementById('renda').value
-    const filiacao = document.getElementById('filiacao').value
+    const filiacao = document.getElementById('filiacao').value.toUpperCase();
 
     return {
         "id": id,
@@ -225,10 +201,12 @@ async function mostrarTabelaCandidatos() {
 
         tabela.innerHTML = "";
 
+
         const candidatos = dadosRecebidos.candidatos;
         if (candidatos.length > 0) {
             candidatos.forEach(candidato => {
                 const linha = document.createElement('tr');
+                linha.id = candidato.id
                 linha.classList.add('fade-in');
                 linha.innerHTML = `
                     <td data-label='Cpf:'>${candidato.cpf}</td>
@@ -262,12 +240,44 @@ async function mostrarTabelaCandidatos() {
                     </td>
                 `;
                 tabela.appendChild(linha);
+
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const idNaURL = urlParams.get('id');
+                // if (urlParams.has(candidato.id)) {
+                if (idNaURL && candidato.id == idNaURL) {
+                    document.getElementById(`${candidato.id}`).style.background = 'rgb(91 192 222 / 7%)'
+                }
+
+                setTimeout(() => {
+                    const elemento = document.getElementById(idNaURL);
+                    if (elemento) {
+                        elemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 500);
+
+                // }
             });
         } else {
             const linha = document.createElement('tr');
-            linha.innerHTML = `
-                <td colspan="12">Nenhum candidato cadastrado...</td>
-            `;
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+            function handleMediaQueryChange(e) {
+                if (e.matches) {
+
+                    linha.innerHTML = `
+                    <td style='display:flex;justify-content: center; align-items:center'>Nenhum candidato cadastrado...</td>
+                `;
+                } else {
+                    linha.innerHTML = `
+                        <td colspan="12">Nenhum candidato cadastrado...</td>
+                    `;
+                }
+            }
+
+            mediaQuery.addEventListener('change', handleMediaQueryChange);
+
+            handleMediaQueryChange(mediaQuery);
+
             tabela.appendChild(linha);
         }
     } catch (erro) {
@@ -422,3 +432,71 @@ function deletar(id) {
 
     })
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Aplica no <html> e <body>
+    document.documentElement.style.scrollBehavior = "smooth";
+    document.body.style.scrollBehavior = "smooth";
+
+    // Aplica em todos os elementos com overflow scroll ou auto
+    const scrollables = document.querySelectorAll('*');
+    scrollables.forEach(el => {
+        const style = window.getComputedStyle(el);
+        if (['auto', 'scroll'].includes(style.overflowY) || ['auto', 'scroll'].includes(style.overflow)) {
+            el.style.scrollBehavior = "smooth";
+        }
+    });
+});
+
+const cpf = document.getElementById('cpf')
+const titulo = document.getElementById('titulo')
+const nome = document.getElementById('nome')
+const endereco = document.getElementById('endereco')
+const numero = document.getElementById('numero')
+const bairro = document.getElementById('bairro')
+const cidade = document.getElementById('cidade')
+const uf = document.getElementById('uf')
+const cep = document.getElementById('cep')
+const renda = document.getElementById('renda')
+const filiacao = document.getElementById('filiacao')
+
+cpf.addEventListener('input', function () {
+    let valor = this.value.replace(/\D/g, '').slice(0, 11);
+    valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+    valor = valor.replace(/(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+    valor = valor.replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+    this.value = valor;
+});
+
+
+titulo.addEventListener('input', function () {
+    let valor = this.value.replace(/\D/g, '').slice(0, 12);
+    valor = valor.replace(/(\d{4})(\d)/, '$1 $2');
+    valor = valor.replace(/(\d{4}) (\d{4})(\d)/, '$1 $2 $3');
+    this.value = valor;
+});
+
+uf.addEventListener('input', function () {
+    this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase().slice(0, 2);
+});
+
+cep.addEventListener('input', function () {
+    let valor = this.value.replace(/\D/g, '').slice(0, 8);
+    valor = valor.replace(/(\d{5})(\d)/, '$1-$2');
+    this.value = valor;
+});
+
+
+
+let navigation = document.querySelector('.nav_menu');
+
+function scroll() {
+    if (scrollY > 0) {
+        navigation.classList.add('style_nav');
+    } else {
+        navigation.classList.remove('style_nav');
+    }
+}
+
+

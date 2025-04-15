@@ -158,7 +158,7 @@ a:hover {
   width: 70px;
   padding: 0;
   z-index: 9999;
-  position: absolute;
+  position: fixed;
 }
 .nav-sm .container.body .col-md-3.left_col.menu_fixed {
   position: fixed;
@@ -334,13 +334,14 @@ table.tile_info td p {
 .nav-sm li li span.fa {
   display: inline-block;
 }
+
 .nav_menu {
   float: left;
   background: #ededed;
   border-bottom: 1px solid #d9dee4;
   margin-bottom: 10px;
   width: 100%;
-  position: relative;
+  padding-bottom: 1.3rem;
 }
 @media (min-width: 480px) {
   .nav_menu {
@@ -405,6 +406,11 @@ body .container.body .right_col {
 @media (max-width: 1270px) and (min-width: 192px) {
   .x_title h2 small {
     display: none;
+  }
+
+  .x_title ul {
+    position: absolute;
+    right: 0;
   }
 }
 .left_col .mCSB_scrollTools {
@@ -487,6 +493,7 @@ body .container.body .right_col {
 .container {
   width: 100%;
   padding: 0;
+  margin-bottom: 2rem;
 }
 .top_nav .nav .open > a,
 .top_nav .nav .open > a:focus,
@@ -683,7 +690,8 @@ a:visited {
 .top_nav .navbar-right {
   margin: 0;
   width: 70%;
-  float: right;
+  position: fixed;
+  right: 0;
 }
 .top_nav .navbar-right li {
   display: inline-block;
@@ -2684,6 +2692,10 @@ ul.social li {
   z-index: 2;
   font-size: 18px;
 }
+
+.link:hover {
+  text-decoration: underline;
+}
 .percent:after {
   content: "%";
   margin-left: 0.1em;
@@ -3491,7 +3503,6 @@ form:after {
 }
 .login_content form div a {
   font-size: 12px;
- 
 }
 .reset_pass {
   margin-top: 10px !important;
@@ -4097,7 +4108,7 @@ ul.notifications {
 }
 
 .pai {
-  margin: 4rem 3rem 0 0;
+  margin: 2rem 3rem 0 0;
 }
 
 .tamanho {
@@ -4107,4 +4118,9 @@ ul.notifications {
 
 .tamanho > li > a {
   color: #e74c3c;
+}
+
+.style_nav {
+  position: fixed;
+  z-index: 20;
 }

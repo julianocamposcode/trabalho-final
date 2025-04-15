@@ -78,18 +78,19 @@ form.addEventListener("submit", manipularEnvio)
 
 
 function pegarDados() {
-    const id = document.getElementById('id').value
-    const codigo = document.getElementById('codigo').value
-    const nome = document.getElementById('nome').value
-    const sigla = document.getElementById('sigla').value
+    const id = document.getElementById('id').value;
+    const codigo = document.getElementById('codigo').value;
+    const nome = document.getElementById('nome').value;
+    const sigla = document.getElementById('sigla').value.toUpperCase();
 
     return {
         "id": id,
         "codigo": codigo,
         "nome": nome,
         "sigla": sigla
-    }
+    };
 }
+
 
 async function adicionarPartido() {
     const dadosPartido = pegarDados();
@@ -160,7 +161,7 @@ async function mostrarTabelaPartidos() {
                     <td data-label="Sigla:">${partido.sigla}</td>
                     <td data-label="Ações:">
                         <div>
-                            <button class="btn btn-info btn-xs" onclick="pegarPartido('${partido.id}','${partido.codigo}','${partido.nome}','${partido.sigla}','atualizar')">Editar</button>
+                            <a href='#edicao'><button class="btn btn-info btn-xs" onclick="pegarPartido('${partido.id}','${partido.codigo}','${partido.nome}','${partido.sigla}','atualizar')">Editar</button></a>
                             <button class="btn btn-danger btn-xs excluir" id='${partido.id}' onclick="deletar('${partido.id}')">Excluir</button>
                         </div>
                     </td>
@@ -177,7 +178,7 @@ async function mostrarTabelaPartidos() {
                 `;
                 } else {
                     linha.innerHTML = `
-                        <td colspan="4">Nenhum partido cadastrado...</td>
+                        <td colspan="12">Nenhum partido cadastrado...</td>
                     `;
                 }
             }
@@ -323,4 +324,35 @@ function deletar(id) {
         }
 
     })
+}
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Aplica no <html> e <body>
+    document.documentElement.style.scrollBehavior = "smooth";
+    document.body.style.scrollBehavior = "smooth";
+
+    // Aplica em todos os elementos com overflow scroll ou auto
+    const scrollables = document.querySelectorAll('*');
+    scrollables.forEach(el => {
+        const style = window.getComputedStyle(el);
+        if (['auto', 'scroll'].includes(style.overflowY) || ['auto', 'scroll'].includes(style.overflow)) {
+            el.style.scrollBehavior = "smooth";
+        }
+    });
+});
+
+
+
+
+let navigation = document.querySelector('.nav_menu');
+
+function scroll() {
+    if (scrollY > 0) {
+        navigation.classList.add('style_nav');
+    } else {
+        navigation.classList.remove('style_nav');
+    }
 }

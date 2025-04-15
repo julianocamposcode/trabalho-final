@@ -55,7 +55,7 @@
                 required
               />
             </div>
-            <div>
+            <div style="position: relative">
               <input
                 type="password"
                 class="form-control"
@@ -64,13 +64,32 @@
                 name="senha"
                 required
               />
+              <span
+                id="toggleSenha"
+                class="fa fa-eye"
+                style="
+                  position: absolute;
+                  top: 50%;
+                  right: 10px;
+                  transform: translateY(-50%);
+                  cursor: pointer;
+                "
+              ></span>
             </div>
-            <div style="display: flex; gap: 0.5rem; align-items: center; justify-content: center;">
+
+            <div
+              style="
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+                justify-content: center;
+              "
+            >
               <button
                 type="submit"
                 class="btn btn-success"
                 id="login"
-                style="display: flex; gap: 0.5rem; align-items: center;"
+                style="display: flex; gap: 0.5rem; align-items: center"
               >
                 Login
               </button>

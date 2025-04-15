@@ -61,7 +61,7 @@ export default class PartidosDB {
     }
     async consultar() {
         const conexao = await conectar();
-        const sql = `SELECT * FROM partidos ORDER BY nome`;
+        const sql = `SELECT * FROM partidos `;
         const [linhas] = await conexao.execute(sql);
         conexao.release();
         return linhas.map(linha => new Partido(linha.id, linha.codigo, linha.nome, linha.sigla));

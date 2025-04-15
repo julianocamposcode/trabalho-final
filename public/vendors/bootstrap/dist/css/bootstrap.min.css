@@ -2602,6 +2602,13 @@ table th[class*="col-"] {
     justify-content: center;
   }
 
+  .center {
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+
+  }
+
   .title_left {
     width: 100% !important;
     text-align: center;
@@ -2627,6 +2634,7 @@ table th[class*="col-"] {
     margin-bottom: 3rem;
     padding-block: 1rem;
   }
+
   .tabela td{
     display: flex;
     align-items: center;
@@ -3437,6 +3445,7 @@ fieldset[disabled] .btn-success:hover {
 }
 .btn-info {
   color: #fff;
+  
   background-color: #5bc0de;
   border-color: #46b8da;
 }
