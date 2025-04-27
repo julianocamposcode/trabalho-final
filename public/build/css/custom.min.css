@@ -1907,6 +1907,7 @@ h4.graph_title {
 }
 table.tile_info {
   padding: 10px 15px;
+  width: 80%;
 }
 table.tile_info span.right {
   margin-right: 0;
@@ -2390,7 +2391,7 @@ textarea:focus {
   background-repeat: repeat-x;
   filter: progid: DXImageTransform.Microsoft.gradient(enabled=false);
   border: 1px solid #ccc;
-  border-bottom-color: #b3b3b3;
+  border-bottom-color: #b3b3b3; 
   border-radius: 4px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
     0 1px 2px rgba(0, 0, 0, 0.05);
@@ -2681,11 +2682,6 @@ ul.social li {
   margin-top: 5px;
   margin-bottom: 5px;
   text-align: center;
-}
-.chart canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 .percent {
   line-height: 110px;
@@ -4096,6 +4092,19 @@ ul.notifications {
   }
 }
 @media (max-width: 767px) {
+  table.tile_info {
+    padding: 10px 15px;
+    width: 100%;
+  }
+
+  .percentage {
+    position: absolute;
+    left: -1rem;
+  }
+  .partidage {
+    position: absolute;
+    left: -1.5rem;
+  }
   .dataTables_length {
     float: none;
   }

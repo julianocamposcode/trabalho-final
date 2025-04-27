@@ -71,7 +71,7 @@ window.onload = () => {
                                     </h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li>
-                                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                            <a class="collapse-link-partido"><i class="fa fa-chevron-up"></i></a>
                                         </li>
                                         <li>
                                             <a class="close-link"><i class="fa fa-close"></i></a>
@@ -138,8 +138,6 @@ window.onload = () => {
                         const mediaQuery = window.matchMedia('(max-width: 768px)');
                         function handleMediaQueryChange(e) {
                             if (e.matches) {
-
-
                                 linha.innerHTML = `
                     <td style='display:flex;justify-content: center; align-items:center'>Nenhum candidato filiado a este partido...</td>
                 `;
@@ -158,7 +156,81 @@ window.onload = () => {
                     }
                 });
             }
+            if (candidatos.length > 0) {
+                document.querySelector('.rosca-mobile').style.visibility = 'visible'
+                const coresPadrao = [
+                    '#3498DB', '#1ABB9C', '#9B59B6', '#9CC2CB', '#E74C3C',
+                    '#F39C12', '#2ECC71', '#E67E22', '#34495E', '#95A5A6'
+                ];
 
+                // Suponha que 'partidos' e 'candidatos' sejam arrays obtidos via fetch
+
+                // Mapeia cada partido para o número de candidatos filiados
+                const dadosPorPartido = partidos.map(partido => {
+                    const quantidade = candidatos.filter(c => c.filiacao === partido.sigla).length;
+                    return {
+                        nome: partido.nome,
+                        sigla: partido.sigla,
+                        quantidade: quantidade
+                    };
+                }).filter(p => p.quantidade > 0); // Filtra partidos sem candidatos
+
+                // Ordena os partidos por quantidade de candidatos em ordem decrescente
+                dadosPorPartido.sort((a, b) => b.quantidade - a.quantidade);
+
+                // Extrai labels, dados e cores
+                const labels = dadosPorPartido.map(p => p.nome);
+                const dados = dadosPorPartido.map(p => p.quantidade);
+                const cores = dadosPorPartido.map((_, i) => coresPadrao[i % coresPadrao.length]);
+
+                // Calcula o total de candidatos
+                const totalCandidatos = dados.reduce((a, b) => a + b, 0);
+
+                // Gera a tabela com os nomes dos partidos e suas porcentagens
+                const tabelaDados = document.getElementById('tabela-dados');
+                dadosPorPartido.forEach((p, index) => {
+                    const percentual = ((p.quantidade / totalCandidatos) * 100).toFixed(1);
+                    const linhaDado = document.createElement('tr');
+                    linhaDado.classList.add('fade-in');
+                    linhaDado.innerHTML = `
+                      <td>
+                        <p><i class="fa fa-square" style="color: ${cores[index]}"></i> ${p.nome}</p>
+                      </td>
+                      <td>${percentual}%</td>
+                    `;
+                    tabelaDados.appendChild(linhaDado);
+                });
+
+                // Cria o gráfico de rosca com Chart.js
+                const ctx = document.getElementById('canvasDoughnut').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+
+                        datasets: [{
+                            data: dados,
+                            backgroundColor: cores,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        plugins: {
+
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const valor = context.parsed;
+                                        const percentual = ((valor / totalCandidatos) * 100).toFixed(0);
+                                        return `${context.label}: ${valor} candidatos (${percentual}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                document.querySelector('.rosca-mobile').style.visibility = 'hidden'
+            }
             aplicarFuncionalidadesGentella(); // Agora só chama aqui!
         })();
     }
@@ -171,7 +243,7 @@ window.onload = () => {
         });
 
         // Botão de colapsar painel
-        $(document).on("click", ".collapse-link", function (e) {
+        $(document).on("click", ".collapse-link-partido", function (e) {
             e.preventDefault();
 
             const panel = $(this).closest(".x_panel");
@@ -199,3 +271,5 @@ function scroll() {
         navigation.classList.remove('style_nav');
     }
 }
+
+

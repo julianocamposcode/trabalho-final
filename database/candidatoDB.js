@@ -86,7 +86,7 @@ export default class CandidatoDB {
         const conexao = await conectar();
         const sql = `SELECT * FROM candidato`;
         const [linhas] = await conexao.execute(sql);
-        conexao.release();
+        conexao.release();  
         return linhas.map(linha => new Candidato(
             linha.id,
             linha.cpf,
