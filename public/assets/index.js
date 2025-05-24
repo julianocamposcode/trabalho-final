@@ -110,6 +110,12 @@ window.onload = () => {
 
                     if (candidatosDoPartido.length > 0) {
                         candidatosDoPartido.forEach(candidato => {
+                            const formatCurrency = (value) => {
+                                return value.toLocaleString('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL',
+                                });
+                            }
                             let linha = document.createElement('tr');
                             linha.innerHTML = `
                                 <td data-label="Cpf:">${candidato.cpf}00</td>
@@ -121,7 +127,7 @@ window.onload = () => {
                                 <td data-label="Cidade:">${candidato.cidade}</td>
                                 <td data-label="UF:">${candidato.uf}</td>
                                 <td data-label="Cep:">${candidato.cep}</td>
-                                <td data-label="Renda Mensal:">${candidato.rendaMensal}</td>
+                                <td data-label="Renda Mensal:">${formatCurrency(JSON.parse(candidato.rendaMensal))}</td>
                                 <td data-label="Filiação:">${candidato.filiacao}</td>
                                 <td data-label="Ações:">
                                     <div>

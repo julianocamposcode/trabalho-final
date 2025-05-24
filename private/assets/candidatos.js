@@ -126,6 +126,7 @@ function pegarDados() {
     const renda = document.getElementById('renda').value
     const filiacao = document.getElementById('filiacao').value.toUpperCase();
 
+
     return {
         "id": id,
         "cpf": cpf,
@@ -208,6 +209,12 @@ async function mostrarTabelaCandidatos() {
                 const linha = document.createElement('tr');
                 linha.id = candidato.id
                 linha.classList.add('fade-in');
+                const formatCurrency = (value) => {
+                    return value.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                    });
+                }
                 linha.innerHTML = `
                     <td data-label='Cpf:'>${candidato.cpf}</td>
                     <td data-label='Titulo de Eleitor:'>${candidato.tituloEleitoral}</td>
@@ -218,7 +225,7 @@ async function mostrarTabelaCandidatos() {
                     <td data-label='Cidade:'>${candidato.cidade}</td>
                     <td data-label='Uf:'>${candidato.uf}</td>
                     <td data-label='Cep:'>${candidato.cep}</td>
-                    <td data-label='Renda Mensal:'>${candidato.rendaMensal}</td>
+                    <td data-label='Renda Mensal:'>${formatCurrency(JSON.parse(candidato.rendaMensal))}</td>
                     <td data-label='Partido:'>${candidato.filiacao}</td>
                     <td data-label='Ações:'>
                         <div>
